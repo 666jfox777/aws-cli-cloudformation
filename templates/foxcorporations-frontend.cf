@@ -1,0 +1,19 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Description" : "Configures S3 and CloudFront",
+  "Parameters" : {
+    set of parameters
+  },
+  "Mappings" : {
+    set of mappings
+  },
+  "Conditions" : {
+    set of conditions
+  },
+  "Resources" : {
+    set of resources
+  },
+  "Outputs" : {
+    set of outputs
+  }
+}
