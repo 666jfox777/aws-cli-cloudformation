@@ -1,6 +1,7 @@
+#!/bin/bash
 ################################################################################
 #
-#  Usage:  ./peerallvpctovpc.sh [profile-name] [region] [vpc-id]
+#  Usage:  ./aws_peerallvpctovpc.sh [profile-name] [region] [vpc-id]
 #  
 #  Arguments:
 #    - vpc-id: The VPC identifier of the VPC you want all your VPCs to be
@@ -20,23 +21,22 @@
 #
 ################################################################################
 if [ -z "$1" ]; then
-  echo "Usage: ./peerallvpctovpc.sh [profile-name] [region] [vpc-id]"
+  echo "Usage: ./aws_peerallvpctovpc.sh [profile-name] [region] [vpc-id]"
   exit
 else
   profile=$1
 fi
 
 if [ -z "$2" ]; then
-  echo "Usage: ./peerallvpctovpc.sh [profile-name] [region] [vpc-id]"
+  echo "Usage: ./aws_peerallvpctovpc.sh [profile-name] [region] [vpc-id]"
   exit
 else
   region=$2
 fi
 
-# Check the command line parameters for a vpc-id. If one is not provided use a
-# hardcoded value.
+# Check the command line parameters for a vpc-id.
 if [ -z "$3" ]; then
-  echo "Usage: ./peerallvpctovpc.sh [profile-name] [region] [vpc-id]"
+  echo "Usage: ./aws_peerallvpctovpc.sh [profile-name] [region] [vpc-id]"
   exit
 else
   trans=$3

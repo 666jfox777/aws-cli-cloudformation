@@ -1,0 +1,52 @@
+#!/bin/bash
+# ./check_aws_cloudwatch_alarm
+# ----------------------
+# Basic cloudwatch check, looks at a cloudwatch alarm and reports if "NOT OK".
+
+EC2_AVAIL_ZONE="`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`"
+EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
+
+while getopts "k:s:r:n:h" arg; do
+  case $arg in
+    k)
+      export AWS_ACCESS_KEY_ID=$OPTARG
+      ;;
+    s)
+      export AWS_SECRET_ACCESS_KEY=$OPTARG
+      ;;
+    r)
+      EC2_REGION=$OPTARG
+      ;;
+    n)
+      NAME=$OPTARG
+      ;;
+    h)
+      echo "Usage: $0 -k <WS-AccessKeyId> -s <AWS-SecretKey>"
+      exit 99
+      ;;
+  esac
+done
+
+CMD="/usr/bin/aws cloudwatch describe-alarms"
+OPT="--region=${EC2_REGION} --alarm-name ${NAME}"
+
+JSON=$(${CMD} ${OPT})
+
+if [ $? -eq 0 ]; then
+  IN_SERVICE_COUNT=$(echo ${JSON} | jq -c '.MetricAlarms[].StateValue' | grep OK |wc -l)
+  TOTAL_COUNT=$(echo ${JSON} | jq -c '.MetricAlarms[].StateValue' | wc -l)
+  if [ ${IN_SERVICE_COUNT} -eq 0 ]; then
+    NAGIOS_STATE=CRITICAL
+    EXIT_CODE=2
+  elif [ ${TOTAL_COUNT} -eq ${IN_SERVICE_COUNT} ]; then
+    NAGIOS_STATE=OK
+    EXIT_CODE=0
+  elif [ ${IN_SERVICE_COUNT} -lt ${TOTAL_COUNT} ]; then
+    NAGIOS_STATE=WARNING
+    EXIT_CODE=1
+  fi
+  echo "${NAGIOS_STATE}: CloudWatch-${NAME} Total:${TOTAL_COUNT} Healthy:${IN_SERVICE_COUNT}"
+else
+  echo "Failed to retrieve CloudWatch health from AWS"
+  EXIT_CODE=99
+fi
