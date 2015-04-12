@@ -1,5 +1,5 @@
-AWS CLI Scripts & CloudFormation Templates
-==========================================
+AWS Scripts & Templates
+=======================
 
 A basic repository containing various useful CLI scripts and CloudFormation
 templates I've written and/or used previously. Some of these are used
