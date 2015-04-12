@@ -20,9 +20,18 @@ Found in the `./scripts` directory.
 
 ### AWS Checks
 
-Several (Nagios / Sensu / etc) checks used to evaluate AWS health. Found in the `./checks` directory.
+Several (Nagios / Sensu / etc) checks used to evaluate AWS health. Found
+in the `./checks` directory.
 
 ### AWS Cloudformation Templates
+
+There are two variations of templates available in the repo.
+`./templates/troposphere/*` contains python templates that output to the
+correct JSON format. You can build the templates by running the `./build.sh`
+script located in the troposhere directory.
+
+Prebuilt versions of the JSON templates are available under
+`./templates/cloudformation/*`.
 
 ### Links
 
