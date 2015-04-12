@@ -1,0 +1,351 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "This CloudFormation template provisions a standard VPC with 3 subnets across 3 Availability Zones. All 3 are public.",
+    "Outputs": {
+        "PublicRouteTable": {
+            "Description": "",
+            "Value": {
+                "Ref": "PublicRouteTable"
+            }
+        },
+        "Subnet1AZ": {
+            "Description": "",
+            "Value": {
+                "Ref": "PublicSubnet1AZ"
+            }
+        },
+        "Subnet1ID": {
+            "Description": "",
+            "Value": {
+                "Ref": "PublicSubnet1"
+            }
+        },
+        "Subnet2AZ": {
+            "Description": "",
+            "Value": {
+                "Ref": "PublicSubnet2AZ"
+            }
+        },
+        "Subnet2ID": {
+            "Description": "",
+            "Value": {
+                "Ref": "PublicSubnet2"
+            }
+        },
+        "Subnet3AZ": {
+            "Description": "",
+            "Value": {
+                "Ref": "PublicSubnet3AZ"
+            }
+        },
+        "Subnet3ID": {
+            "Description": "",
+            "Value": {
+                "Ref": "PublicSubnet3"
+            }
+        },
+        "VPC": {
+            "Description": "",
+            "Value": {
+                "Ref": "VPC"
+            }
+        }
+    },
+    "Parameters": {
+        "PublicSubnet1AZ": {
+            "AllowedValues": [
+                "us-east-1a",
+                "us-east-1b",
+                "us-east-1c",
+                "us-east-1e",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+            ],
+            "Default": "us-east-1b",
+            "Description": "The availaibility zone to place this subnet in. Changing the AZ issues a replacement of the stack.",
+            "Type": "String"
+        },
+        "PublicSubnet1CIDR": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "Default": "10.0.2.0/24",
+            "Description": "The IP Address space used by this subnet. Changing the CIDR issues a replacement of the stack.",
+            "Type": "String"
+        },
+        "PublicSubnet2AZ": {
+            "AllowedValues": [
+                "us-east-1a",
+                "us-east-1b",
+                "us-east-1c",
+                "us-east-1e",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+            ],
+            "Default": "us-east-1b",
+            "Description": "The availaibility zone to place this subnet in. Changing the AZ issues a replacement of the stack.",
+            "Type": "String"
+        },
+        "PublicSubnet2CIDR": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "Default": "10.0.2.0/24",
+            "Description": "The IP Address space used by this subnet. Changing the CIDR issues a replacement of the stack.",
+            "Type": "String"
+        },
+        "PublicSubnet3AZ": {
+            "AllowedValues": [
+                "us-east-1a",
+                "us-east-1b",
+                "us-east-1c",
+                "us-east-1e",
+                "us-west-2a",
+                "us-west-2b",
+                "us-west-2c"
+            ],
+            "Default": "us-east-1b",
+            "Description": "The availaibility zone to place this subnet in. Changing the AZ issues a replacement of the stack.",
+            "Type": "String"
+        },
+        "PublicSubnet3CIDR": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "Default": "10.0.2.0/24",
+            "Description": "The IP Address space used by this subnet. Changing the CIDR issues a replacement of the stack.",
+            "Type": "String"
+        },
+        "VPCCIDR": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "Default": "10.0.0.0/16",
+            "Description": "The IP Address space used by this VPC. Changing the CIDR issues a replacement of the stack.",
+            "Type": "String"
+        },
+        "VPCName": {
+            "Default": "Basic VPC",
+            "Description": "The name of this VPC. Useful for distinguishing different VPCs.",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "AttachGateway": {
+            "Properties": {
+                "InternetGatewayId": {
+                    "Ref": "InternetGateway"
+                },
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::VPCGatewayAttachment"
+        },
+        "InternetGateway": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Ref": "VPCName"
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::InternetGateway"
+        },
+        "PublicInSubnetAclEntry": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "PublicSubnetAcl"
+                },
+                "PortRange": {
+                    "From": "80",
+                    "To": "80"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": "32000"
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "PublicOutSubnetAclEntry": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "PublicSubnetAcl"
+                },
+                "PortRange": {
+                    "From": "65535",
+                    "To": "1"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": "32000"
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "PublicRoute": {
+            "DependsOn": "AttachGateway",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "InternetGateway"
+                },
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        },
+        "PublicRouteTable": {
+            "Properties": {
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "PublicSubnet1": {
+            "Properties": {
+                "CidrBlock": "10.0.0.0/24",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "PublicSubnet2": {
+            "Properties": {
+                "CidrBlock": "10.0.0.0/24",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "PublicSubnet3": {
+            "Properties": {
+                "CidrBlock": "10.0.0.0/24",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "PublicSubnetAcl": {
+            "Properties": {
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::NetworkAcl"
+        },
+        "Subnet1NetworkAclAssociation": {
+            "Properties": {
+                "NetworkAclId": {
+                    "Ref": "PublicSubnetAcl"
+                },
+                "SubnetId": {
+                    "Ref": "PublicSubnet1"
+                }
+            },
+            "Type": "AWS::EC2::SubnetNetworkAclAssociation"
+        },
+        "Subnet1RouteTableAssociation": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "PublicSubnet1"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "Subnet2NetworkAclAssociation": {
+            "Properties": {
+                "NetworkAclId": {
+                    "Ref": "PublicSubnetAcl"
+                },
+                "SubnetId": {
+                    "Ref": "PublicSubnet2"
+                }
+            },
+            "Type": "AWS::EC2::SubnetNetworkAclAssociation"
+        },
+        "Subnet2RouteTableAssociation": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "PublicSubnet2"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "Subnet3NetworkAclAssociation": {
+            "Properties": {
+                "NetworkAclId": {
+                    "Ref": "PublicSubnetAcl"
+                },
+                "SubnetId": {
+                    "Ref": "PublicSubnet3"
+                }
+            },
+            "Type": "AWS::EC2::SubnetNetworkAclAssociation"
+        },
+        "Subnet3RouteTableAssociation": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "PublicSubnet3"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "VPC": {
+            "Properties": {
+                "CidrBlock": {
+                    "Ref": "VPCCIDR"
+                },
+                "EnableDnsHostnames": "true",
+                "EnableDnsSupport": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Ref": "VPCName"
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::VPC"
+        }
+    }
+}
