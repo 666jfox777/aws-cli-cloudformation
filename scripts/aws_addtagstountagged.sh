@@ -36,41 +36,41 @@ else
   value=$4
 fi
 
-# Get a JSON object with the instance and tags.
-instances=`aws ec2 describe-instances --profile ${profile} --region ${region} | jq -c '.Reservations[].Instances'`
+# Get a JSON object with the instance ids.
+instances=`aws ec2 describe-instances --profile ${profile} --region ${region} | jq -c '.Reservations[].Instances[].InstanceId' | tr -d '"' | tr -d ' '`
 
 # For each instance, check for a tag and add it if missing.
 for instance in $instances
 do
-
-  # Store the instance id.
-  id=`echo $instance | jq -c '.InstanceId'`
   
+  echo "InstanceID: ${instance}"
+
   # Store a list of keys.
-  tags=`echo $instance | jq -c '.Tags[].Key'`
+  tags=`aws ec2 describe-instances --instance-ids ${instance} --profile ${profile} --region ${region} | jq -c '.Reservations[].Instances[].Tags[].Key' | tr -d '"' | tr -d ' '`
   
   # By default assume the key does not exist.
-  tagexists=1
+  tagexists=false
   
   # For each tag on the instance.
   for tag in $tags
   do
-  
+
     # Check and see if the tag exists that matches the one we're looking to add.
-    if [ "$tag" -eq "$key" ];then
-      
+    if [ "$tag" == "$key" ];then
+
       # Tag exists, set value to true.
-      tagexists=0
+      tagexists=true
       
     fi
     
   done
   
   # If we found the tag, then skip the instance, otherwise add the tag.
-  if [ $tagexists ]; then
-    echo "Tag exists, skipping ${id}."
+  if $tagexists; then
+    echo "-- Tag exists, skipping ${instance}."
   else
-    aws ec2 create-tags --resources ${id} --tags Key=${key},Value=${value} --profile ${profile} --region ${region}
+    echo "-- Adding tag ${key}=${value} to ${instance}."
+    aws ec2 create-tags --resources ${instance} --tags Key=${key},Value=${value} --profile ${profile} --region ${region}
   fi
 
 done
