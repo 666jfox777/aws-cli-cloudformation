@@ -74,3 +74,44 @@ do
   fi
 
 done
+
+
+# Get a JSON object with the ebs volume ids.
+volumes=`aws ec2 describe-volumes --profile ${profile} --region ${region} | jq -c '.Volumes[].VolumeId' | tr -d '"' | tr -d ' '`
+
+# For each volume, check for a tag and add it if missing.
+for volume in $volumes
+do
+  
+  echo "VolumeID: ${volume}"
+
+  # Store a list of keys.
+  tags=`aws ec2 describe-volumes --volume-ids ${volume} --profile ${profile} --region ${region} | jq -c '.Volumes[].Tags[].Key' | tr -d '"' | tr -d ' '`
+  
+  # By default assume the key does not exist.
+  tagexists=false
+  
+  # For each tag on the instance.
+  for tag in $tags
+  do
+
+    # Check and see if the tag exists that matches the one we're looking to add.
+    if [ "$tag" == "$key" ];then
+
+      # Tag exists, set value to true.
+      tagexists=true
+      
+    fi
+    
+  done
+  
+  # If we found the tag, then skip the instance, otherwise add the tag.
+  if $tagexists; then
+    echo "-- Tag exists, skipping ${volume}."
+  else
+    echo "-- Adding tag ${key}=${value} to ${volume}."
+    aws ec2 create-tags --resources ${volume} --tags Key=${key},Value=${value} --profile ${profile} --region ${region}
+  fi
+
+done
+
