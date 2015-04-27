@@ -38,18 +38,11 @@ else
   vpc=$3
 fi
 
-if [ -z "$4" ]; then
-  echo "Usage:  ./aws_classiclink_disable.sh [profile] [region] [vpc-id] [sg-id]"
-  exit
-else
-  sg=$4
-fi
-
 # Deactivate classiclink on all instances... Note this will show errors for instances in a VPC.
 instances=`aws ec2 describe-instances --profile ${profile} --region ${region} | jq -c '.Reservations[].Instances[].InstanceId' | tr -d '"' | tr -d ' '`
 for instance in $instances
 do
-  aws ec2 dettach-classic-link-vpc --instance-id ${instance} --vpc-id ${vpc} --profile ${profile} --region ${region}
+  aws ec2 detach-classic-link-vpc --instance-id ${instance} --vpc-id ${vpc} --profile ${profile} --region ${region}
 done
 
 # Disable classiclink on a vpc
