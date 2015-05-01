@@ -2,7 +2,7 @@
 ################################################################################
 #
 #  Usage:  ./aws_addtagstountagged.sh [profile-name] [region] [tag key]\
-#          [tag value]
+#          [tag value] [Optional: security group id]
 #
 # Description:  This script cycles through all EC2 instances and EBS volumes
 #               and adds the tag requested if a tag does not exist.
@@ -37,7 +37,12 @@ else
 fi
 
 # Get a JSON object with the instance ids.
-instances=`aws ec2 describe-instances --profile ${profile} --region ${region} | jq -c '.Reservations[].Instances[].InstanceId' | tr -d '"' | tr -d ' '`
+if [ -z "$5" ]; then
+  instances=`aws ec2 describe-instances --profile ${profile} --region ${region} | jq -c '.Reservations[].Instances[].InstanceId' | tr -d '"' | tr -d ' '`
+else
+  instances=`aws ec2 describe-instances --filters Name=instance.group-id,Values=${5} --profile ${profile} --region ${region} | jq -c '.Reservations[].Instances[].InstanceId' | tr -d '"' | tr -d ' '`
+fi
+
 
 # For each instance, check for a tag and add it if missing.
 for instance in $instances
