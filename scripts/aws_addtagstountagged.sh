@@ -82,7 +82,11 @@ done
 
 
 # Get a JSON object with the ebs volume ids.
-volumes=`aws ec2 describe-volumes --profile ${profile} --region ${region} | jq -c '.Volumes[].VolumeId' | tr -d '"' | tr -d ' '`
+if [ -z "$5" ]; then
+  volumes=`aws ec2 describe-volumes --profile ${profile} --region ${region} | jq -c '.Volumes[].VolumeId' | tr -d '"' | tr -d ' '`
+else
+  volumes=""
+fi
 
 # For each volume, check for a tag and add it if missing.
 for volume in $volumes
