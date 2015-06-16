@@ -22,5 +22,5 @@ instances=`aws ec2 describe-spot-instance-requests --filters Name=state,Values=c
 
 for instance in $instances
 do
-  aws ec2 terminate-instances --instance-ids ${instance} --profile ${profile} --region ${region} > /dev/null 2>&1
+  aws ec2 terminate-instances --instance-ids ${instance} --profile ${profile} --region ${region}& > /dev/null 2>&1
 done
