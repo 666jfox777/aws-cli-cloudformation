@@ -18,7 +18,7 @@ else
   region=$2
 fi
 
-instances=`aws ec2 describe-spot-instance-requests --filters Name=state,Values=cancelled --profile ${profile} --region ${region} | jq -c '.SpotInstanceRequests[].InstanceId'`
+instances=`aws ec2 describe-spot-instance-requests --filters Name=state,Values=cancelled --profile ${profile} --region ${region} | jq -c '.SpotInstanceRequests[].InstanceId' | tr -d '"' | tr -d ' '`
 
 for instance in $instances
 do
