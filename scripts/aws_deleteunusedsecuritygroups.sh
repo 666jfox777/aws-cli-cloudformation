@@ -40,7 +40,7 @@ do
   read -n 1 REPLY
   echo
   if test "$REPLY" = "y" -o "$REPLY" = "Y" -o "$FORCE" = "y"; then
-    aws ec2 delete-security-group --group-id ${sg}
+    aws ec2 delete-security-group --group-id ${sg}  --profile $profile --region $region
   else
     echo "Did not delete ${sg} - ${name}"
   fi
