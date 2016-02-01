@@ -1,0 +1,228 @@
+    default (SG: sg-b1a451d8 | Classic)
+        Firewall Rules:
+            Ingress:
+                Protocol: tcp, FromPort: 0, ToPort: 65535, Security Group: default (sg-b1a451d8)
+                Protocol: udp, FromPort: 0, ToPort: 65535, Security Group: default (sg-b1a451d8)
+                Protocol: icmp, FromPort: -1, ToPort: -1, Security Group: default (sg-b1a451d8)
+                Protocol: tcp, FromPort: 80, ToPort: 80, CIDR: 0.0.0.0/0
+            Egress:
+        Instances:
+            Instance Id: i-65839f8e, Instance Name: RedshiftLoader, Auto Scaling Group: , BC Tag: datascience, Private IP: 10.68.90.108, Public IP: 54.234.235.62
+
+    nucaptcha (SG: sg-27a1544e | Classic)
+        Firewall Rules:
+            Ingress:
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 108.180.112.86/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 108.180.190.24/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 12.40.240.131/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 146.115.70.195/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 172.218.35.24/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 174.1.200.88/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 174.1.249.9/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 174.1.52.189/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 174.129.15.141/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 174.6.122.34/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 184.151.231.157/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 199.21.149.122/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 206.214.244.226/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 206.214.244.227/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 216.19.183.68/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 24.86.162.73/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 24.87.61.103/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 50.68.81.87/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 52.4.123.168/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 54.187.208.21/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 54.200.127.175/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 54.204.22.239/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 54.213.114.183/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 54.85.89.198/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 66.196.34.102/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 66.196.34.78/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 70.67.125.87/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 70.68.110.73/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 70.68.121.166/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 70.68.154.208/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 70.70.37.24/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 73.167.118.86/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 74.198.150.144/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 75.157.142.219/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 75.157.22.246/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 96.48.16.176/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 96.54.36.156/32
+                Protocol: tcp, FromPort: 0, ToPort: 65535, Security Group: nucaptcha (sg-27a1544e)
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 108.180.112.86/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 108.180.190.24/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 146.115.70.195/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 174.1.200.88/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 174.1.249.9/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 174.1.52.189/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 174.6.122.34/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 199.21.149.122/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 206.214.244.226/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 206.214.244.227/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 24.86.162.73/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 54.187.208.21/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 54.200.127.175/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 54.204.22.239/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 66.196.34.102/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 66.196.34.78/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 70.67.125.87/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 70.68.110.73/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 70.68.121.166/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 70.68.154.208/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 70.70.37.24/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 73.167.118.86/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 75.157.142.219/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 75.157.22.246/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 96.48.16.176/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, CIDR: 96.54.36.156/32
+                Protocol: udp, FromPort: 0, ToPort: 65535, Security Group: nucaptcha (sg-27a1544e)
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 108.180.112.86/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 108.180.190.24/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 146.115.70.195/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 174.1.200.88/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 174.1.249.9/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 174.1.52.189/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 174.129.15.141/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 174.6.122.34/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 199.21.149.122/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 206.214.244.226/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 206.214.244.227/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 24.86.162.73/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 54.187.208.21/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 54.200.127.175/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 54.204.22.239/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 66.196.34.102/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 66.196.34.78/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 70.67.125.87/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 70.68.110.73/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 70.68.121.166/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 70.68.154.208/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 70.70.37.24/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 73.167.118.86/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 75.157.142.219/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 75.157.22.246/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 96.48.16.176/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, CIDR: 96.54.36.156/32
+                Protocol: icmp, FromPort: -1, ToPort: -1, Security Group: nucaptcha (sg-27a1544e)
+                Protocol: tcp, FromPort: 22, ToPort: 22, CIDR: 54.187.208.21/32
+            Egress:
+        Instances:
+            Instance Id: i-3f7a4f59, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.220.233.113, Public IP: 50.17.132.12
+            Instance Id: i-d96508f4, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1b-r027436, BC Tag: nd-backend, Private IP: 10.164.100.53, Public IP: 54.242.175.223
+            Instance Id: i-3e026845, Instance Name: nudetectdashboardus-east-1a, Auto Scaling Group: , BC Tag: dashboard, Private IP: null, Public IP: null
+            Instance Id: i-808a1ffe, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.222.102.213, Public IP: 54.234.23.19
+            Instance Id: i-caffbd27, Instance Name: nudetectdashboardus-east-1b, Auto Scaling Group: , BC Tag: dashboard, Private IP: 10.113.170.101, Public IP: 54.162.127.122
+            Instance Id: i-9dcc67cc, Instance Name: , Auto Scaling Group: gearman-r025197, BC Tag: tdv-backend, Private IP: 10.93.42.134, Public IP: 54.237.45.141
+            Instance Id: i-b4593318, Instance Name: , Auto Scaling Group: key-r030838, BC Tag: shared, Private IP: 10.47.166.252, Public IP: 54.166.179.27
+            Instance Id: i-b63ddb5e, Instance Name: , Auto Scaling Group: gearman-r025197, BC Tag: tdv-backend, Private IP: 10.87.94.27, Public IP: 54.226.18.105
+            Instance Id: i-34086298, Instance Name: beapi, Auto Scaling Group: beapi-classic-r038171, BC Tag: nd-backend, Private IP: 10.166.159.72, Public IP: 54.158.244.139
+            Instance Id: i-35086299, Instance Name: beapi, Auto Scaling Group: beapi-classic-r038171, BC Tag: nd-backend, Private IP: 10.182.50.106, Public IP: 107.22.112.243
+            Instance Id: i-3208629e, Instance Name: beapi, Auto Scaling Group: beapi-classic-r038171, BC Tag: nd-backend, Private IP: 10.171.90.11, Public IP: 54.145.111.43
+            Instance Id: i-76beb287, Instance Name: apple-squid, Auto Scaling Group: , BC Tag: unknown, Private IP: null, Public IP: null
+            Instance Id: i-8862fb63, Instance Name: , Auto Scaling Group: hadoop_namenode-us-east-1a-r027436, BC Tag: nd-backend, Private IP: 10.113.180.242, Public IP: 54.87.155.141
+            Instance Id: i-dd6f602c, Instance Name: AppleProxy, Auto Scaling Group: , BC Tag: nd-frontend, Private IP: 10.65.30.156, Public IP: 54.163.243.20
+            Instance Id: i-90d24139, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.168.149.201, Public IP: 54.163.66.148
+            Instance Id: i-a248aa5d, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.101.131.179, Public IP: 54.211.224.8
+            Instance Id: i-3285c8d8, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.186.150.84, Public IP: 50.17.32.9
+            Instance Id: i-65839f8e, Instance Name: RedshiftLoader, Auto Scaling Group: , BC Tag: datascience, Private IP: 10.68.90.108, Public IP: 54.234.235.62
+            Instance Id: i-89a65da5, Instance Name: HCOMProxy, Auto Scaling Group: ndproxy-r01-v000, BC Tag: nd-frontend, Private IP: 10.65.138.30, Public IP: 54.221.231.73
+            Instance Id: i-7334f559, Instance Name: , Auto Scaling Group: gearman-r025197, BC Tag: tdv-backend, Private IP: 10.136.10.45, Public IP: 54.224.202.22
+            Instance Id: i-0be6026f, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.253.98.14, Public IP: 107.22.42.16
+            Instance Id: i-5d5f00a0, Instance Name: , Auto Scaling Group: key-r030838, BC Tag: shared, Private IP: 10.113.174.174, Public IP: 54.83.85.184
+            Instance Id: i-435f00be, Instance Name: , Auto Scaling Group: key-r030838, BC Tag: shared, Private IP: 10.102.178.69, Public IP: 54.145.47.93
+            Instance Id: i-5a71803b, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.222.187.159, Public IP: 184.72.190.251
+            Instance Id: i-520ee8ad, Instance Name: , Auto Scaling Group: key-r030838, BC Tag: , Private IP: 10.168.145.219, Public IP: 54.162.49.221
+            Instance Id: i-cab6b420, Instance Name: log_forwarder, Auto Scaling Group: , BC Tag: shared, Private IP: 10.231.169.234, Public IP: 107.21.204.65
+            Instance Id: i-69384183, Instance Name: nudetectloadtesteast-1a, Auto Scaling Group: , BC Tag: shared, Private IP: null, Public IP: null
+            Instance Id: i-fdbe122e, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1a-r027436, BC Tag: nd-backend, Private IP: 10.9.141.171, Public IP: 54.82.6.15
+            Instance Id: i-7c2c0ed4, Instance Name: ndgs, Auto Scaling Group: ndgs-classic-spot-r038060, BC Tag: nd-backend, Private IP: 10.231.198.111, Public IP: 54.146.174.122
+            Instance Id: i-e7e1e3b7, Instance Name: , Auto Scaling Group: , BC Tag: shared, Private IP: 10.146.227.200, Public IP: 174.129.15.141
+            Instance Id: i-aa787a41, Instance Name: nudetectdashboardus-east-1a, Auto Scaling Group: , BC Tag: dashboard, Private IP: 10.233.58.26, Public IP: 50.17.98.25
+            Instance Id: i-1da24ff6, Instance Name: NDAPIStaticProxy, Auto Scaling Group: , BC Tag: nd-frontend, Private IP: null, Public IP: null
+            Instance Id: i-a3af2f59, Instance Name: AppleProxy, Auto Scaling Group: , BC Tag: nd-frontend, Private IP: 10.236.155.175, Public IP: 54.163.243.248
+            Instance Id: i-363c9ce5, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1a-r027436, BC Tag: nd-backend, Private IP: 10.151.88.213, Public IP: 54.82.90.26
+            Instance Id: i-0f07b7e3, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1b-r027436, BC Tag: nd-backend, Private IP: 10.147.174.253, Public IP: 54.146.30.160
+            Instance Id: i-ef08b803, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1b-r027436, BC Tag: nd-backend, Private IP: 10.185.49.183, Public IP: 54.224.237.116
+            Instance Id: i-62145188, Instance Name: nudetectrefsiteeast-1a, Auto Scaling Group: , BC Tag: dev, Private IP: 10.166.114.72, Public IP: 54.242.35.252
+            Instance Id: i-197ae0f2, Instance Name: cloudera, Auto Scaling Group: , BC Tag: shared, Private IP: 10.187.16.147, Public IP: 54.87.166.35
+            Instance Id: i-6149ab9e, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.13.131.102, Public IP: 54.197.207.23
+            Instance Id: i-c62c0e6e, Instance Name: ndgs, Auto Scaling Group: ndgs-classic-spot-r038060, BC Tag: nd-backend, Private IP: 10.31.93.43, Public IP: 54.145.160.232
+            Instance Id: i-66fe58b5, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1a-r027436, BC Tag: nd-backend, Private IP: 10.136.62.106, Public IP: 54.147.154.49
+            Instance Id: i-c74c652d, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1a-r027436, BC Tag: nd-backend, Private IP: 10.171.46.177, Public IP: 54.147.186.232
+            Instance Id: i-62272a4c, Instance Name: graphite.nucaptcha.com3, Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.190.53.251, Public IP: 184.73.226.61
+            Instance Id: i-a17e5d40, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1e-r027436, BC Tag: nd-backend, Private IP: 10.93.134.251, Public IP: 54.204.75.153
+            Instance Id: i-a07e5d41, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1e-r027436, BC Tag: nd-backend, Private IP: 10.147.28.119, Public IP: 54.81.247.208
+            Instance Id: i-5e59998d, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.5.155.109, Public IP: 54.90.173.232
+            Instance Id: i-b25a32d4, Instance Name: , Auto Scaling Group: , BC Tag: tdv-frontend, Private IP: 10.110.94.239, Public IP: 54.227.242.39
+            Instance Id: i-e5d55b35, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.203.170.20, Public IP: 54.91.205.74
+            Instance Id: i-997ed477, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1e-r027436, BC Tag: nd-backend, Private IP: 10.146.244.162, Public IP: 54.205.229.158
+            Instance Id: i-5ba915a4, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.154.231.96, Public IP: 54.158.17.22
+            Instance Id: i-870c1d2e, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.43.158.207, Public IP: 54.146.164.132
+            Instance Id: i-1b70daf5, Instance Name: , Auto Scaling Group: hadoop_namenode-us-east-1e-r027436, BC Tag: nd-backend, Private IP: 10.35.182.31, Public IP: 54.91.80.179
+            Instance Id: i-b2bd435c, Instance Name: gdash2014-09-11try2, Auto Scaling Group: , BC Tag: nd-backend, Private IP: 10.29.227.238, Public IP: 54.204.22.103
+            Instance Id: i-61430e06, Instance Name: graphite.nd.nudatasecurity.com, Auto Scaling Group: , BC Tag: nd-backend, Private IP: 10.63.54.40, Public IP: 54.242.78.111
+            Instance Id: i-3048aacf, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.167.25.120, Public IP: 54.145.70.2
+            Instance Id: i-79dfc559, Instance Name: tableau.nudatasecurity.com, Auto Scaling Group: , BC Tag: datascience, Private IP: null, Public IP: null
+            Instance Id: i-170b2cec, Instance Name: nudetectloadtesteast-1a, Auto Scaling Group: , BC Tag: unknown, Private IP: 10.136.115.181, Public IP: 54.90.216.100
+            Instance Id: i-160b2ced, Instance Name: nudetectloadtesteast-1a, Auto Scaling Group: , BC Tag: unknown, Private IP: null, Public IP: null
+            Instance Id: i-c51a1ce9, Instance Name: ice.nd.nudatasecurity.com, Auto Scaling Group: , BC Tag: shared, Private IP: null, Public IP: null
+            Instance Id: i-8790df6a, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1b-r027436, BC Tag: nd-backend, Private IP: 10.164.7.243, Public IP: 54.225.16.85
+            Instance Id: i-66eac9cf, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.139.84.199, Public IP: 54.147.238.237
+            Instance Id: i-476a86a7, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.146.250.183, Public IP: 54.205.174.249
+            Instance Id: i-06b65bf9, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.13.131.245, Public IP: 54.162.96.180
+            Instance Id: i-c39bbe2d, Instance Name: , Auto Scaling Group: hadoop_datanode-us-east-1e-r027436, BC Tag: nd-backend, Private IP: 10.186.144.6, Public IP: 54.227.26.124
+            Instance Id: i-851ff97a, Instance Name: , Auto Scaling Group: key-r030838, BC Tag: shared, Private IP: 10.71.185.79, Public IP: 54.161.67.92
+            Instance Id: i-79c33592, Instance Name: gearmand.nucaptcha.com, Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.149.77.246, Public IP: 107.20.196.77
+            Instance Id: i-7e2c0ed6, Instance Name: ndgs, Auto Scaling Group: ndgs-classic-spot-r038060, BC Tag: nd-backend, Private IP: 10.153.183.88, Public IP: 54.157.224.120
+            Instance Id: i-e62fef0d, Instance Name: dashboard.nucaptcha.com, Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.73.91.30, Public IP: 174.129.15.30
+            Instance Id: i-297a4f4f, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.220.145.168, Public IP: 23.22.151.16
+            Instance Id: i-473f3091, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.203.173.77, Public IP: 54.145.233.9
+            Instance Id: i-11773afb, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.9.135.38, Public IP: 54.204.100.88
+            Instance Id: i-20fce3df, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.181.22.109, Public IP: 54.80.214.137
+            Instance Id: i-80dabd50, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.169.196.226, Public IP: 50.19.47.205
+            Instance Id: i-b2f8385e, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.40.53.224, Public IP: 54.166.135.237
+            Instance Id: i-357a4f53, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.222.134.18, Public IP: 107.21.80.241
+            Instance Id: i-80b4597f, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.101.131.185, Public IP: 54.162.119.95
+            Instance Id: i-643dbec8, Instance Name: , Auto Scaling Group: tdv-r023831b, BC Tag: tdv-frontend, Private IP: 10.237.170.56, Public IP: 54.81.218.127
+            Instance Id: i-b4f83858, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.10.187.90, Public IP: 23.20.162.196
+            Instance Id: i-328369e0, Instance Name: beapi, Auto Scaling Group: beapi-classic-r038171, BC Tag: nd-backend, Private IP: 10.218.133.105, Public IP: 54.160.191.255
+            Instance Id: i-338369e1, Instance Name: beapi, Auto Scaling Group: beapi-classic-r038171, BC Tag: nd-backend, Private IP: 10.149.67.155, Public IP: 54.144.106.173
+            Instance Id: i-318369e3, Instance Name: beapi, Auto Scaling Group: beapi-classic-r038171, BC Tag: nd-backend, Private IP: 10.11.163.49, Public IP: 54.227.111.161
+            Instance Id: i-6c3bb592, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.146.201.93, Public IP: 54.221.73.148
+            Instance Id: i-62cd889f, Instance Name: nudetectrefsiteus-east-1a, Auto Scaling Group: , BC Tag: , Private IP: null, Public IP: null
+            Instance Id: i-a348aa5c, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.231.135.251, Public IP: 54.198.82.157
+            Instance Id: i-b5af435e, Instance Name: HCOMProxy, Auto Scaling Group: ndproxy-r01-v000, BC Tag: nd-frontend, Private IP: 10.138.45.14, Public IP: 174.129.229.171
+            Instance Id: i-721aa698, Instance Name: nudetectloadtesteast-1a, Auto Scaling Group: , BC Tag: shared, Private IP: null, Public IP: null
+            Instance Id: i-10f1ea73, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.126.19.155, Public IP: 54.234.218.80
+            Instance Id: i-7a60c1a9, Instance Name: , Auto Scaling Group: gearman-r025197, BC Tag: tdv-backend, Private IP: 10.61.168.123, Public IP: 54.196.244.165
+            Instance Id: i-9f8a676e, Instance Name: , Auto Scaling Group: , BC Tag: tdv-backend, Private IP: 10.16.139.226, Public IP: 184.73.24.173
+            Instance Id: i-be577045, Instance Name: nudetectloadtesteast-1a, Auto Scaling Group: , BC Tag: unknown, Private IP: null, Public IP: null
+            Instance Id: i-d55883ba, Instance Name: publishermonitor.nudatasecurity.com3, Auto Scaling Group: , BC Tag: shared, Private IP: 10.137.58.172, Public IP: 54.243.185.106
+            Instance Id: i-577d107a, Instance Name: , Auto Scaling Group: hadoop_namenode-us-east-1b-r027436, BC Tag: nd-backend, Private IP: 10.237.169.32, Public IP: 54.92.149.127
+
+    nucaptcha_opsview (SG: sg-39a15450 | Classic)
+        Firewall Rules:
+            Ingress:
+                Protocol: tcp, FromPort: 0, ToPort: 65535, CIDR: 184.106.130.25/32
+                Protocol: tcp, FromPort: 443, ToPort: 443, CIDR: 184.151.231.232/32
+                Protocol: tcp, FromPort: 443, ToPort: 443, CIDR: 204.236.134.223/32
+                Protocol: tcp, FromPort: 443, ToPort: 443, CIDR: 52.10.60.158/32
+                Protocol: tcp, FromPort: 443, ToPort: 443, CIDR: 54.173.86.124/32
+                Protocol: tcp, FromPort: 443, ToPort: 443, CIDR: 54.186.135.24/32
+                Protocol: tcp, FromPort: 443, ToPort: 443, CIDR: 54.204.22.239/32
+                Protocol: tcp, FromPort: 22, ToPort: 22, CIDR: 206.214.244.227/32
+            Egress:
+        Instances:
+            Instance Id: i-e7e1e3b7, Instance Name: , Auto Scaling Group: , BC Tag: shared, Private IP: 10.146.227.200, Public IP: 174.129.15.141
+
+    nucaptcha_key (SG: sg-3ba15452 | Classic)
+        Firewall Rules:
+            Ingress:
+                Protocol: tcp, FromPort: 0, ToPort: 65535, Security Group: Name Unavailable (sg-9b7397f2)
+                Protocol: udp, FromPort: 0, ToPort: 65535, Security Group: Name Unavailable (sg-9b7397f2)
+                Protocol: icmp, FromPort: -1, ToPort: -1, Security Group: Name Unavailable (sg-9b7397f2)
+                Protocol: tcp, FromPort: 80, ToPort: 80, CIDR: 0.0.0.0/0
+            Egress:
+        Instances:
+            Instance Id: i-b4593318, Instance Name: , Auto Scaling Group: key-r030838, BC Tag: shared, Private IP: 10.47.166.252, Public IP: 54.166.179.27
