@@ -75,7 +75,10 @@ exports.handler = function(event, context) {
                     });
                 }
             }
-            console.done();
+            
+            setTimeout(function() {
+                context.done();
+            }, 10000);
         }
     });
 };
