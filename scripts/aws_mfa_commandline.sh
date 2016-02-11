@@ -15,7 +15,7 @@ if [ -z "$1" ]; then
   echo "    username   = justin"
   echo "    token      = 123456"
   echo "    duration   = 3600"
-  echo "    profile    = justin (optional)
+  echo "    profile    = justin (optional)"
   exit
 else
   account=$1
@@ -29,7 +29,7 @@ if [ -z "$2" ]; then
   echo "    username   = justin"
   echo "    token      = 123456"
   echo "    duration   = 3600"
-  echo "    profile    = justin (optional)
+  echo "    profile    = justin (optional)"
   exit
 else
   username=$2
@@ -43,7 +43,7 @@ if [ -z "$3" ]; then
   echo "    username   = justin"
   echo "    token      = 123456"
   echo "    duration   = 3600"
-  echo "    profile    = justin (optional)
+  echo "    profile    = justin (optional)"
   exit
 else
   token=$3
@@ -57,7 +57,7 @@ if [ -z "$4" ]; then
   echo "    username   = justin"
   echo "    token      = 123456"
   echo "    duration   = 3600"
-  echo "    profile    = justin (optional)
+  echo "    profile    = justin (optional)"
   exit
 else
   duration=$4
