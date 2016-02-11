@@ -12,7 +12,7 @@ if [ -z "$1" ]; then
   echo "  Example Arguments:"
   echo "  ------------------"
   echo "    account-id = 123456789012"
-  echo "    username   = justin
+  echo "    username   = justin"
   echo "    token      = 123456"
   echo "    duration   = 3600"
   echo "    profile    = justin (optional)
@@ -26,7 +26,7 @@ if [ -z "$2" ]; then
   echo "  Example Arguments:"
   echo "  ------------------"
   echo "    account-id = 123456789012"
-  echo "    username   = justin
+  echo "    username   = justin"
   echo "    token      = 123456"
   echo "    duration   = 3600"
   echo "    profile    = justin (optional)
@@ -40,7 +40,7 @@ if [ -z "$3" ]; then
   echo "  Example Arguments:"
   echo "  ------------------"
   echo "    account-id = 123456789012"
-  echo "    username   = justin
+  echo "    username   = justin"
   echo "    token      = 123456"
   echo "    duration   = 3600"
   echo "    profile    = justin (optional)
@@ -54,7 +54,7 @@ if [ -z "$4" ]; then
   echo "  Example Arguments:"
   echo "  ------------------"
   echo "    account-id = 123456789012"
-  echo "    username   = justin
+  echo "    username   = justin"
   echo "    token      = 123456"
   echo "    duration   = 3600"
   echo "    profile    = justin (optional)
