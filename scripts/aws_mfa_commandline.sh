@@ -1,13 +1,15 @@
-
 #!/bin/bash
 ################################################################################
 #
 #  Usage:  ./aws_mfa_commandline.sh [profile-name] [region]
 #
-# Description:  
+#  Description:  Easy way to authenticate using a virtual mfa device without
+#                having to remember the exact command. Injects temporary
+#                credentials into your environment.
 #
 ################################################################################
-if [ -z "$1" ]; then
+usage ()
+{
   echo "Usage: source $0 [account-id] [username] [token] [duration] [profile-name]"
   echo "  Example Arguments:"
   echo "  ------------------"
@@ -16,48 +18,31 @@ if [ -z "$1" ]; then
   echo "    token      = 123456"
   echo "    duration   = 3600"
   echo "    profile    = justin (optional)"
+}
+
+if [ -z "$1" ]; then
+  usage
   exit
 else
   account=$1
 fi
 
 if [ -z "$2" ]; then
-  echo "Usage: source $0 [account-id] [username] [token] [duration] [profile-name]"
-  echo "  Example Arguments:"
-  echo "  ------------------"
-  echo "    account-id = 123456789012"
-  echo "    username   = justin"
-  echo "    token      = 123456"
-  echo "    duration   = 3600"
-  echo "    profile    = justin (optional)"
+  usage
   exit
 else
   username=$2
 fi
 
 if [ -z "$3" ]; then
-  echo "Usage: source $0 [account-id] [username] [token] [duration] [profile-name]"
-  echo "  Example Arguments:"
-  echo "  ------------------"
-  echo "    account-id = 123456789012"
-  echo "    username   = justin"
-  echo "    token      = 123456"
-  echo "    duration   = 3600"
-  echo "    profile    = justin (optional)"
+  usage
   exit
 else
   token=$3
 fi
 
 if [ -z "$4" ]; then
-  echo "Usage: source $0 [account-id] [username] [token] [duration] [profile-name]"
-  echo "  Example Arguments:"
-  echo "  ------------------"
-  echo "    account-id = 123456789012"
-  echo "    username   = justin"
-  echo "    token      = 123456"
-  echo "    duration   = 3600"
-  echo "    profile    = justin (optional)"
+  usage
   exit
 else
   duration=$4
