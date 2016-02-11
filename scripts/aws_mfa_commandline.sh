@@ -20,31 +20,13 @@ usage ()
   echo "    profile    = justin (optional)"
 }
 
-if [ -z "$1" ]; then
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
   usage
   exit
 else
   account=$1
-fi
-
-if [ -z "$2" ]; then
-  usage
-  exit
-else
   username=$2
-fi
-
-if [ -z "$3" ]; then
-  usage
-  exit
-else
   token=$3
-fi
-
-if [ -z "$4" ]; then
-  usage
-  exit
-else
   duration=$4
 fi
 
