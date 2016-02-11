@@ -8,7 +8,7 @@
 #
 ################################################################################
 if [ -z "$1" ]; then
-  echo "Usage: ./$0 [account-id] [username] [token] [duration] [profile-name]"
+  echo "Usage: source $0 [account-id] [username] [token] [duration] [profile-name]"
   echo "  Example Arguments:"
   echo "  ------------------"
   echo "    account-id = 123456789012"
@@ -22,7 +22,7 @@ else
 fi
 
 if [ -z "$2" ]; then
-  echo "Usage: ./$0 [account-id] [username] [token] [duration] [profile-name]"
+  echo "Usage: source $0 [account-id] [username] [token] [duration] [profile-name]"
   echo "  Example Arguments:"
   echo "  ------------------"
   echo "    account-id = 123456789012"
@@ -36,7 +36,7 @@ else
 fi
 
 if [ -z "$3" ]; then
-  echo "Usage: ./$0 [account-id] [username] [token] [duration] [profile-name]"
+  echo "Usage: source $0 [account-id] [username] [token] [duration] [profile-name]"
   echo "  Example Arguments:"
   echo "  ------------------"
   echo "    account-id = 123456789012"
@@ -50,7 +50,7 @@ else
 fi
 
 if [ -z "$4" ]; then
-  echo "Usage: ./$0 [account-id] [username] [token] [duration] [profile-name]"
+  echo "Usage: source $0 [account-id] [username] [token] [duration] [profile-name]"
   echo "  Example Arguments:"
   echo "  ------------------"
   echo "    account-id = 123456789012"
