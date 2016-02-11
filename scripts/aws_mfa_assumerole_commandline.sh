@@ -23,7 +23,7 @@ usage ()
   echo "    profile              = justin (optional)"
 }
 
-if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ] || [ -z "$7" ]; then
   usage
   exit
 else
@@ -31,12 +31,15 @@ else
   username=$2
   token=$3
   duration=$4
+  assumed=$5
+  rolename=$6
+  session=$7
 fi
 
-if [ -z "$5" ]; then
+if [ -z "$8" ]; then
   aws sts get-session-token --duration-seconds ${duration} --serial-number arn:aws:iam::${account}:mfa/${username} --token-code ${token}  > mfa-user-output.txt
 else
-  profile=$5
+  profile=$8
   aws sts get-session-token --duration-seconds ${duration} --serial-number arn:aws:iam::${account}:mfa/${username} --token-code ${token} --profile ${profile}  > mfa-user-output.txt
 fi
 
