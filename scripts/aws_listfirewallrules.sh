@@ -13,6 +13,33 @@ usage ()
   echo "Usage: $0 [profile-name] [region] > output.csv"
 }
 
+get_security_group()
+{
+  OLDIFS=$IFS
+  IFS=$'\n'
+  groups=`echo "$securitygroups" | jq -c '.SecurityGroups[]'`
+  for group in $groups
+  do
+    if [[ `echo "$group" | jq -c '.GroupId' | tr -d '"' | tr -d ' '` == $1 ]]; then
+      echo "$group"
+    fi
+  done
+  IFS=$OLDIFS
+}
+
+get_vpc_name()
+{
+  OLDIFS=$IFS
+  IFS=$'\n'
+  for tag in `echo "$tags" | jq -c '.Tags[]'`
+  do
+    if [[ `echo "$tag" | jq -c '.ResourceId' | tr -d '"' | tr -d ' '` == $1 ]]; then
+      echo "$tag" | jq -c '.Value' | tr -d '"' | tr -d ' '
+    fi
+  done
+  IFS=$OLDIFS
+}
+
 # Process all the arguments
 while getopts ":h?p:r:" opt; do
     case $opt in
@@ -38,30 +65,45 @@ done
 
 # Set a few defaults
 PROFILE=${PROFILE:-""}
-REGION=${REGION:-"us-east-1"}
+REGION=${REGION:-""}
 
 if [ -z "$PROFILE" ]; then
   echo "WARN: As no profile has been set, using default credentials." >&2
 else
-  PROFILE="$PROFILE"
+  PROFILE="--profile $PROFILE"
 fi
 
+if [ -z "$REGION" ]; then
+  echo "WARN: As no region has been set, using default of us-east-1." >&2
+  REGION="--region us-east-1"
+else
+  REGION="--region $REGION"
+fi
+
+# BIG VARS
+securitygroups=`aws ec2 describe-security-groups $PROFILE $REGION`
+tags=`aws ec2 describe-tags --filters "Name=resource-type,Values=vpc" "Name=key,Values=Name" $PROFILE $REGION`
+
+# Print out the CSV header
 echo "Security Group ID, Security Group Name, Security Group Type, Ingress or Egress, Security Group Rule, Protocol, From Port, To Port, CIDR or Security Group ID"
-securitygroups=`aws ec2 describe-security-groups $PROFILE --region $REGION | jq -c '.SecurityGroups[].GroupId' | tr -d '"' | tr -d ' '`
-for securitygroup in $securitygroups
+
+# Get the security group ids and iterate through them
+securitygroupids=`echo "$securitygroups" | jq -c '.SecurityGroups[].GroupId' | tr -d '"' | tr -d ' '`
+
+for securitygroupid in $securitygroupids
 do
-  secname=`aws ec2 describe-security-groups --group-ids ${securitygroup} $PROFILE --region $REGION | jq -c '.SecurityGroups[].GroupName' | tr -d '"' | tr -d ' '`
-  vpcid=`aws ec2 describe-security-groups --group-ids ${securitygroup} $PROFILE --region $REGION | jq -c '.SecurityGroups[].VpcId' | tr -d '"' | tr -d ' '`
+  secname=`get_security_group ${securitygroupid} | jq -c '.GroupName' | tr -d '"' | tr -d ' '`
+  vpcid=`get_security_group ${securitygroupid} | jq -c '.VpcId' | tr -d '"' | tr -d ' '`
   sectype=""
   if [ "null" != "${vpcid}" ]
   then
-    vpcname=`aws ec2 describe-tags --filters "Name=resource-id,Values=${vpcid}" "Name=key,Values=Name" $PROFILE --region $REGION | jq -c '.Tags[].Value' | tr -d '"' | tr -d ' '`
+    vpcname=`get_vpc_name ${vpcid}`
     sectype="${vpcname} (${vpcid})"
   else
     sectype="Classic"
   fi
-  rulesin=`aws ec2 describe-security-groups --group-ids ${securitygroup} $PROFILE --region $REGION | jq -c '.SecurityGroups[].IpPermissions[]'`
-  rulesout=`aws ec2 describe-security-groups --group-ids ${securitygroup} $PROFILE --region $REGION | jq -c '.SecurityGroups[].IpPermissionsEgress[]'`
+  rulesin=`get_security_group ${securitygroupid} | jq -c '.IpPermissions[]'`
+  rulesout=`get_security_group ${securitygroupid} | jq -c '.IpPermissionsEgress[]'`
   for rule in $rulesin
   do
     protocol=`echo "$rule" | jq -c '.IpProtocol' | tr -d '"' | tr -d ' '`
@@ -73,19 +115,19 @@ do
     then
       for cidr in $ipranges
       do
-        echo "$securitygroup,$secname,$sectype,Ingress,#,$protocol,$fromport,$toport,$cidr"
+        echo "$securitygroupid,$secname,$sectype,Ingress,#,$protocol,$fromport,$toport,$cidr"
       done
     fi
     if [ "" != "${refsgids}" ]
     then
       for sgid in $refsgids
       do
-        sgname=`aws ec2 describe-security-groups --group-ids ${sgid} $PROFILE --region $REGION 2> /dev/null | jq -c '.SecurityGroups[].GroupName' | tr -d '"' | tr -d ' '`
+        sgname=`get_security_group ${sgid} | jq -c '.GroupName' | tr -d '"' | tr -d ' '`
         if [ "" != "${sgname}" ]
         then
-          echo "$securitygroup,$secname,$sectype,Ingress,#,$protocol,$fromport,$toport,$sgname ($sgid)"
+          echo "$securitygroupid,$secname,$sectype,Ingress,#,$protocol,$fromport,$toport,$sgname ($sgid)"
         else
-          echo "$securitygroup,$secname,$sectype,Ingress,#,$protocol,$fromport,$toport,$sgid (Name Error)"
+          echo "$securitygroupid,$secname,$sectype,Ingress,#,$protocol,$fromport,$toport,$sgid (Name Error)"
         fi
       done
     fi
@@ -102,19 +144,19 @@ do
     then
       for cidr in $ipranges
       do
-        echo "$securitygroup,$secname,$sectype,Egress,#,$protocol,$fromport,$toport,$cidr"
+        echo "$securitygroupid,$secname,$sectype,Egress,#,$protocol,$fromport,$toport,$cidr"
       done
     fi
     if [ "" != "${refsgids}" ]
     then
       for sgid in $refsgids
       do
-        sgname=`aws ec2 describe-security-groups --group-ids ${sgid} $PROFILE --region $REGION | jq -c '.SecurityGroups[].GroupName' | tr -d '"' | tr -d ' '`
+        sgname=`get_security_group ${sgid} | jq -c '.GroupName' | tr -d '"' | tr -d ' '`
         if [ "" != "${sgname}" ]
         then
-          echo "$securitygroup,$secname,$sectype,Egress,#,$protocol,$fromport,$toport,$sgname ($sgid)"
+          echo "$securitygroupid,$secname,$sectype,Egress,#,$protocol,$fromport,$toport,$sgname ($sgid)"
         else
-          echo "$securitygroup,$secname,$sectype,Egress,#,$protocol,$fromport,$toport,$sgid (Name Error)"
+          echo "$securitygroupid,$secname,$sectype,Egress,#,$protocol,$fromport,$toport,$sgid (Name Error)"
         fi
       done
     fi
