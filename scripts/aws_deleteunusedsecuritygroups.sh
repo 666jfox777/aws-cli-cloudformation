@@ -36,9 +36,11 @@ for sg in $sgs
 do
   name=`aws ec2 describe-security-groups --group-ids $sg --query 'SecurityGroups[*].GroupName'  --output text --profile $profile --region $region`
   echo "Attempting to delete ${sg}: ${name}"
-  echo -n "Do you really want to delete ${sg}? [N/y] "
-  read -n 1 REPLY
-  echo
+  if [ -z "$FORCE" ]; then
+    echo -n "Do you really want to delete ${sg}? [N/y] "
+    read -n 1 REPLY
+    echo
+  fi
   if test "$REPLY" = "y" -o "$REPLY" = "Y" -o "$FORCE" = "y"; then
     aws ec2 delete-security-group --group-id ${sg}  --profile $profile --region $region
   else
